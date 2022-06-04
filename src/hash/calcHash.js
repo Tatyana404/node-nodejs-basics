@@ -1,5 +1,5 @@
 const { createHash } = await import('crypto')
-import { readFile } from 'node:fs/promises'
+import { readFile } from 'fs/promises'
 
 export const calculateHash = async () => {
   try {
