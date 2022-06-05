@@ -6,7 +6,7 @@ console.log(`Arguments: ${JSON.stringify(argv)}`);
 const echoInput = (chunk) => {
     const chunkStringified = chunk.toString();
     if (chunkStringified.includes('CLOSE')) process.exit(0);
-    process.stdout.write(`Received from master process: ${chunk.toString()}`)
+    process.stdout.write(`Received from master process: ${chunk.toString().trim()}`)
 };
 
 process.stdin.on('data', echoInput);
