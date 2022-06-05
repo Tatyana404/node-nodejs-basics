@@ -1,8 +1,10 @@
 import { readdir } from 'fs/promises'
+import { dirname, join } from 'path'
+import { fileURLToPath } from 'url'
 
 export const list = async () => {
   try {
-    const fileNames = await readdir('./files')
+    const fileNames = await readdir(join(dirname(fileURLToPath(import.meta.url)), './files'))
     const result = []
 
     for (const fileName of fileNames) {

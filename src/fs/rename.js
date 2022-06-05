@@ -1,8 +1,10 @@
 import { rename as renameFile } from 'fs/promises'
+import { dirname, join } from 'path'
+import { fileURLToPath } from 'url'
 
 export const rename = async () => {
   try {
-    await renameFile('./files/wrongFilename.txt', './files/properFilename.md')
+    await renameFile(join(dirname(fileURLToPath(import.meta.url)), './files/wrongFilename.txt'), join(dirname(fileURLToPath(import.meta.url)), './files/properFilename.md'))
   } catch (err) {
     if (err) {
       if (err.code === 'ENOENT') {

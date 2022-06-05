@@ -1,14 +1,15 @@
 import { readdir, mkdir, copyFile } from 'fs/promises'
-import { join } from 'path'
+import { dirname, join } from 'path'
+import { fileURLToPath } from 'url'
 
 export const copy = async () => {
   try {
-    const files = await readdir('./files', { withFileTypes: true })
-    await mkdir('files_copy')
+    const files = await readdir(join(dirname(fileURLToPath(import.meta.url)), './files'), { withFileTypes: true })
+    await mkdir(join(dirname(fileURLToPath(import.meta.url)), './files_copy'))
 
     for (let file of files) {
-      const srcPath = join('./files', file.name)
-      const destPath = join('files_copy', file.name)
+      const srcPath = join(dirname(fileURLToPath(import.meta.url)), './files', file.name)
+      const destPath = join(dirname(fileURLToPath(import.meta.url)), './files_copy', file.name)
 
       if (file.isDirectory()) {
         await copyDir(srcPath, destPath)

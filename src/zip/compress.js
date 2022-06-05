@@ -1,12 +1,14 @@
 import { createReadStream, createWriteStream } from 'fs'
+import { dirname, join } from 'path'
+import { fileURLToPath } from 'url'
 import { createGzip } from 'zlib'
 import { pipeline } from 'stream'
 import { promisify } from 'util'
 
 export const compress = async () => {
   try {
-    const inp = createReadStream('./files/fileToCompress.txt')
-    const out = createWriteStream('archive.gz')
+    const inp = createReadStream(join(dirname(fileURLToPath(import.meta.url)), './files/fileToCompress.txt'))
+    const out = createWriteStream(join(dirname(fileURLToPath(import.meta.url)), './archive.gz'))
     const pipe = promisify(pipeline)
     const gzip = createGzip()
 

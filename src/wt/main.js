@@ -1,4 +1,6 @@
 import { Worker } from 'worker_threads'
+import { dirname, join } from 'path'
+import { fileURLToPath } from 'url' 
 import { cpus } from 'os'
 
 export const performCalculations = async () => {
@@ -6,7 +8,7 @@ export const performCalculations = async () => {
 
   const createWorker = workerData =>
     new Promise((response, reject) => {
-      const workers = new Worker('./worker.js', { workerData })
+      const workers = new Worker(join(dirname(fileURLToPath(import.meta.url)),  './worker.js'), { workerData })
 
       workers.once('message', res => {
         response({

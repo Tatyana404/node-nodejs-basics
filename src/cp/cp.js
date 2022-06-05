@@ -1,7 +1,9 @@
 import { spawn } from 'child_process'
+import { dirname, join } from 'path'
+import { fileURLToPath } from 'url'
 
 export const spawnChildProcess = async args => {
-  const cp = spawn('node', ['./files/script.js', ...args])
+  const cp = spawn('node', [join(dirname(fileURLToPath(import.meta.url)), './files/script.js'), ...args])
 
   cp.stdout.on('data', data => console.log(data.toString()))
 

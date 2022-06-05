@@ -1,8 +1,10 @@
 import { unlink } from 'fs/promises'
+import { dirname, join } from 'path'
+import { fileURLToPath } from 'url'
 
 export const remove = async () => {
   try {
-    await unlink('files/fileToRemove.txt')
+    await unlink(join(dirname(fileURLToPath(import.meta.url)), './files/fileToRemove.txt'))
   } catch (err) {
     if (err) {
       if (err.code === 'ENOENT') {
