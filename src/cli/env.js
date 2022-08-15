@@ -2,14 +2,15 @@ export const parseEnv = () => {
   const env = process.env
   const keys = Object.keys(env)
   const values = Object.values(env)
-  let count = 0
+  const variables = []
 
   for (let i = 0; i < keys.length; i++) {
-    if (keys[i].substring(0, 4) === 'RSS_') {
-      count++
-      console.log(`${keys[i]}${count}=${values[i]}${count};`)
+    if (keys[i].startsWith('RSS_')) {
+      variables.push(`${keys[i]}=${values[i]}`)
     }
   }
+
+  console.log(variables.join('; '))
 }
 
 parseEnv()
