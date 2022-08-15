@@ -18,12 +18,10 @@ export const copy = async () => {
       }
     }
   } catch (err) {
-    if (err) {
-      if (err.code === 'ENOENT' || err.code === 'EEXIST') {
-        throw new Error('FS operation failed')
-      }
-      throw err
+    if (err.code === 'ENOENT' || err.code === 'EEXIST') {
+      throw new Error('FS operation failed')
     }
+    throw err
   }
 }
 

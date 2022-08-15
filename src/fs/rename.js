@@ -6,12 +6,10 @@ export const rename = async () => {
   try {
     await renameFile(join(dirname(fileURLToPath(import.meta.url)), './files/wrongFilename.txt'), join(dirname(fileURLToPath(import.meta.url)), './files/properFilename.md'))
   } catch (err) {
-    if (err) {
-      if (err.code === 'ENOENT') {
-        throw new Error('FS operation failed')
-      }
-      throw err
+    if (err.code === 'ENOENT') {
+      throw new Error('FS operation failed')
     }
+    throw err
   }
 }
 

@@ -7,12 +7,10 @@ export const create = async () => {
     await open(join(dirname(fileURLToPath(import.meta.url)), './files/fresh.txt'), 'wx')
     await writeFile(join(dirname(fileURLToPath(import.meta.url)), './files/fresh.txt'), 'I am fresh and young')
   } catch (err) {
-    if (err) {
-      if (err.code === 'EEXIST') {
-        throw new Error('FS operation failed')
-      }
-      throw err
+    if (err.code === 'EEXIST') {
+      throw new Error('FS operation failed')
     }
+    throw err
   }
 }
 

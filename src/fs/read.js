@@ -8,12 +8,10 @@ export const read = async () => {
 
     console.log(fileContent.toString())
   } catch (err) {
-    if (err) {
-      if (err.code === 'ENOENT') {
-        throw new Error('FS operation failed')
-      }
-      throw err
+    if (err.code === 'ENOENT') {
+      throw new Error('FS operation failed')
     }
+    throw err
   }
 }
 

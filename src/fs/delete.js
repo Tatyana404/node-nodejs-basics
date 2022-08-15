@@ -6,12 +6,10 @@ export const remove = async () => {
   try {
     await unlink(join(dirname(fileURLToPath(import.meta.url)), './files/fileToRemove.txt'))
   } catch (err) {
-    if (err) {
-      if (err.code === 'ENOENT') {
-        throw new Error('FS operation failed')
-      }
-      throw err
+    if (err.code === 'ENOENT') {
+      throw new Error('FS operation failed')
     }
+    throw err
   }
 }
 
